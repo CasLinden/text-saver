@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="sign-up-page">
+      <h1>
+        <span class="color1">T</span>
+        <span class="color2">e</span>
+        <span class="color3">x</span>
+        <span class="color4">t</span>
+        <span class="color5"> </span>
+        <span class="color6">S</span>
+        <span class="color7">a</span>
+        <span class="color8">v</span>
+        <span class="color9">e</span>
+        <span class="color10">r</span>
+    </h1>
+      <h2>Sign Up</h2>
+      <% if(errors) { %>
+        <% errors.forEach(function(error) { %>
+            <p><%= error.msg %></p>
+        <% }); %>
+      <% } %>
+      <form class="sign-up-form" action="" method="POST">
+        <label for="username">Username</label>
+        <input name="username" placeholder="new username" type="text" />
+        <label for="password">Password</label>
+        <input name="password" placeholder="new password" type="password" />
+        <label for="password-confirm">Confirm Password</label>
+        <input name="password-confirm" placeholder="confirm new password" type="password" />
+        <p class="warning">
+          There is no password reset functionality yet, save your password
+          somewhere!
+        </p>
+        <button>Sign Up</button>
+      </form>
+    </div>
+  </body>
+</html>

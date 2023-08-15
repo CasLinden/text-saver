@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Arvo';
+    src: url('/fonts/arvo-regular-webfont.woff2') format('woff2'),
+         url('/fonts/arvo-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+    
+}
+@font-face {
+    font-family: 'Bitter';
+    src: url('/fonts/bitter.woff2') format('woff2'),
+         url('/fonts/bitter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open sans light';
+    src: url('/fonts/open-sans-light.woff2') format('woff2'),
+         url('/fonts/open-sans-light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto sans JP';
+    src: url('/fonts/noto-sans-jp.woff2') format('woff2'),
+         url('/fonts/noto-sans-jp.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+
+body {
+    background-color: #333;
+    color: #f5f5f5;
+    font-family: 'Bitter','Open sans light', sans-serif, Arial ;
+    font-size: 16px;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
+body *:lang(ja),
+p:lang(ja),
+div:lang(ja),
+span:lang(ja) {
+    font-family: 'Noto Sans JP', sans-serif !important;
+}
+
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+h1 {
+    font-family: 'Arvo', sans-serif;
+    letter-spacing: -3px;
+}
+
+h2{
+    font-family: 'Open sans light', sans-serif;
+}
+
+.color1 { color: #FFB3BA; } /* Pastel Red */
+.color2 { color: #FFDFBA; } /* Pastel Orange */
+.color3 { color: #FFFFBA; } /* Pastel Yellow */
+.color4 { color: #BAFFC9; } /* Pastel Green */
+.color5 { color: transparent; padding-left: 10px; } 
+.color6 { color: #BAE1FF; } /* Pastel Blue */
+.color7 { color: #BBAEFF; } /* Pastel Indigo */
+.color8 { color: #EBAEFF; } /* Pastel Violet */
+.color9 { color: #FFBAE1; } /* Pastel Pink */
+.color10 { color: #FFBAFF; }
+
+/* COLORS BASED ON THE DOCUMENTS SVG */
+/* .color1 { color: #E5594F; } 
+.color2 { color: #EB743A; } 
+.color3 { color: #F39A2B; } 
+.color4 { color: #F89437; } 
+.color5 { color: #F0D043; } 
+.color6 { color: #556998; } 
+.color7 { color: #6277BA; } 
+.color8 { color: #4A5699; } 
+.color9 { color: #5E4E9E; } 
+.color10 { color: #C45FA0; }  */
+
+.login-page h1{
+    margin: 30px;
+}
+
+
+form {
+    background: none;
+    border: none;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    background: #444;
+    color: #f5f5f5;
+    font-size: 1.2rem;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background:  #5E4E9E; 
+    color: #f5f5f5;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #4A5699;
+}
+
+button a{
+    color: #f5f5f5;
+}
+
+a{
+    color: #BAE1FF;
+}
+
+
+.login-page, 
+.sign-up-page{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form,
+.sign-up-form,
+.page-explanation{
+    width: 325px;
+    margin-bottom: 30px;
+}
+
+.warning{
+    margin-bottom: 5px;
+    color: #77DD77;
+}
+

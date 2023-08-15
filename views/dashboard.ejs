@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Saver</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="/css/options-dropdowns.css" />
+    <script src="/scripts/index.js" type="module" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="entries-page">
+      <header>
+        <h1>
+          <span class="color1">T</span>
+          <span class="color2">e</span>
+          <span class="color3">x</span>
+          <span class="color4">t</span>
+          <span class="color5"> </span>
+          <span class="color6">S</span>
+          <span class="color7">a</span>
+          <span class="color8">v</span>
+          <span class="color9">e</span>
+          <span class="color10">r</span>
+        </h1>
+
+        <div class="user-tab">
+          <div class="user-tab-user"><span> <%= currentUser.username %> </span><img src="/images/avatar.svg" alt=""></div>
+          <a class="logout-link" href="/log-out"> Log Out</a>
+        </div>
+      </header>
+      <button id="new-entry-button">Create new Document</button>
+      <div id="page-top-form-container" data-id="<%= currentUser._id %>">
+    </div>      
+      <section class="user-entries-section">
+        <h2>Your Documents:</h2>
+        <div id="entries-container">
+          <% entries.forEach(function(entry) { %>
+          <div
+            class="entry"
+            data-id="<%= entry._id %>"
+            data-user="<%= entry.user %>"
+            data-title="<%= entry.entryTitle %>"
+            data-content="<%= entry.entryContent %>"
+          >
+            <div class="entry-head">
+              <img class="document-icon" src="/images/document.svg" alt="Document Icon" />
+              <h3><%- entry.entryTitle %></h3>
+              <div class="entry-date"><%= entry.entryDateFormatted %></div>
+              <div class="options-icon-container"><img class="entry-options" src="/images/options.svg" alt="Three dots vertically aligned"></div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
