@@ -52,7 +52,7 @@ exports.validate_signup_form = [
     .custom((value, { req }) => value === req.body.password)
     .withMessage("Passwords do not match"),
   body("username").trim().escape(),
-  body("password").trim().escape(),
+  body("password").trim(),
 ];
 
 // handle sign-up form submit
