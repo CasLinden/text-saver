@@ -63,13 +63,14 @@ exports.validate_entry = [
 // handle new entry POST
 exports.create_entry = asyncHandler(async (req, res) => {
    const { entry, 'entry-title': entryTitle } = req.body;
+   console.log(res.locals.currentUser)
    const newEntry = new Entry({
        entryContent: entry,
        entryTitle: entryTitle,
-       user: res.locals.currentUser._id
+       user: res.locals.currentUser._id || req.params.userid
    });
    await newEntry.save();
-   res.json({ success: true, redirectUrl: `/dashboard/${res.locals.currentUser._id}` });
+   res.json({ success: true, redirectUrl: `/dashboard/${res.locals.currentUser._id || req.params.userid}` });
 });
 
 // handle copy entry POST
