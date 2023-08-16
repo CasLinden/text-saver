@@ -44,7 +44,6 @@ function handleEntryClick(event) {
 entriesContainer.addEventListener("click", handleEntryClick);
 newEntryButton.addEventListener("click", function (event) {
   let unsavedForms = checkForUnsaved()
-  console.log(unsavedForms)
   if (unsavedForms) {
     alert(`Currently working on document named: ${unsavedForms}, save or undo first`)
     return

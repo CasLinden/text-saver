@@ -50,7 +50,7 @@ function appendSortDropdown() {
         sortEntries(sortByCreationDate);
         updateCurrentSortType('Creation Date');
     }));
-    dropdown.appendChild(createDropdownOption('../images/type.svg', 'Alphabetically', () => {
+    dropdown.appendChild(createDropdownOption('../images/type.svg', 'Alphabet', () => {
         sortEntries(sortAlphabetically);
         updateCurrentSortType('Alphabetically');
     }));
