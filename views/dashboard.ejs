@@ -25,7 +25,7 @@
         </h1>
 
         <div class="user-tab">
-          <div class="user-tab-user"><span> <%= currentUser.username %> </span><img src="/images/avatar.svg" alt=""></div>
+          <div class="user-tab-user"><span> <%= currentUser.username %> </span><img src="/images/avatar.svg" alt="portrait of anonymous person"></div>
           <a class="logout-link" href="/log-out"> Log Out</a>
         </div>
       </header>
@@ -33,15 +33,28 @@
       <div id="page-top-form-container" data-id="<%= currentUser._id %>">
     </div>      
       <section class="user-entries-section">
-        <h2>Your Documents:</h2>
+        <div class="user-entries-header">
+          <h2>Your Documents:</h2>
+          <div id="sort-entries-menu">
+            <div id="sort-types-menu">Sort By:&nbsp;<span class="current-sort-type"> Last Edit</span> <img src="/images/chevron-down.svg" alt=""></div>
+            <div class="arrow-up sort-arrow"><img src="/images/arrow-up.svg" alt=""></div>
+            <div class="arrow-down sort-arrow active"><img src="/images/arrow-down.svg" alt=""></div>
+          </div>
+        </div>
         <div id="entries-container">
-          <% entries.forEach(function(entry) { %>
+          <% 
+            entries.sort(function(a, b) {
+              return b.lastEdited.getTime() - a.lastEdited.getTime(); 
+            }).forEach(function(entry) { 
+          %>
           <div
             class="entry"
             data-id="<%= entry._id %>"
             data-user="<%= entry.user %>"
             data-title="<%= entry.entryTitle %>"
             data-content="<%= entry.entryContent %>"
+            data-last-edit="<%= entry.lastEdited.toISOString() %>"
+            data-creation-date="<%= entry.entryDate.toISOString() %>"
           >
             <div class="entry-head">
               <img class="document-icon" src="/images/document.svg" alt="Document Icon" />

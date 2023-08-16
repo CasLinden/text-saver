@@ -2,9 +2,12 @@ import { expandEntry, collapseEntry } from "./entryView.js";
 import { showOptions } from "./optionsDropdown.js";
 import { renderEntryForm } from "./entryForm.js";
 import { checkForUnsaved } from "./utils.js";
+import { showSortOptions } from "./sortOptions.js";
 
 const entriesContainer = document.getElementById("entries-container");
 const newEntryButton = document.getElementById("new-entry-button");
+const sortEntriesMenu = document.getElementById("sort-types-menu")
+
 
 function handleEntryClick(event) {
   const entry = event.target.closest(".entry");
@@ -20,7 +23,6 @@ function handleEntryClick(event) {
 
   // If options dropdown clicked
   if (event.target.closest(".options-dropdown")) return;
-
   if (!event.target.closest(".entry-head")) {
     return;
   }
@@ -50,3 +52,4 @@ newEntryButton.addEventListener("click", function (event) {
   renderEntryForm();
   newEntryButton.style.display = "none"
 });
+sortEntriesMenu.addEventListener('click', showSortOptions)

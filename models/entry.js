@@ -6,7 +6,7 @@ const EntrySchema = new Schema({
   entryContent: { type: String, required: true },
   entryTitle: { type: String },
   entryDate: { type: Date, default: Date.now },
-  lastEdited: { type: [Date] },
+  lastEdited: { type: Date, default: Date.now },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

@@ -3,30 +3,9 @@ import { decodeHTML } from './utils.js'
 function createEntryView(entry) {
     const container = document.createElement("div");
     container.classList.add("entry-view");
-    // const optionsBar = createOptionsBar(entry);
-    // container.appendChild(optionsBar);
     const contentField = createEntryContentField(entry);
     container.appendChild(contentField);
     return container;
-}
-
-function createOptionsBar(entry) {
-    const bar = document.createElement("div");
-    bar.classList.add("options-bar");
-    const copyButton = copyOption(entry)
-    bar.appendChild(copyButton)
-    return bar;
-}
-
-function copyOption (entry) {
-    const copyButton = document.createElement('div')
-    copyButton.classList.add('option-button')
-    copyButton.textContent = "copy"
-    const copyText = entry.getAttribute('data-content')
-    copyButton.addEventListener("click", () => {
-        navigator.clipboard.writeText(copyText)
-    })
-    return copyButton
 }
 
 function createEntryContentField(entry) {

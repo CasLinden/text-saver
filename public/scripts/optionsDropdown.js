@@ -3,23 +3,25 @@ import { collapseEntry } from "./entryView.js";
 import { checkForUnsaved } from "./utils.js";
 
 
-function createDropdown() {
+function createDropdown(classString) {
   const dropdown = document.createElement("div");
-  dropdown.classList.add("options-dropdown");
+  dropdown.classList.add('options-dropdown');
   return dropdown;
 }
 
-function createDropdownOption (pathToIcon, className, textContent, callBack) {
+function createDropdownOption (pathToIcon, textContent, callBack) {
   const option = document.createElement('div')
-  option.classList.add('options-dropdown-option', `${className}-option`)
+  option.classList.add('options-dropdown-option')
   option.textContent= textContent
-  const icon = optionIcon(pathToIcon)
+  if (pathToIcon){
+  const icon = createOptionIcon(pathToIcon)
   option.insertBefore(icon, option.firstChild )
+  }
   option.addEventListener('click', callBack)
   return option
 }
 
-function optionIcon (pathToIcon){
+function createOptionIcon (pathToIcon){
   const iconContainer = document.createElement('div')
   iconContainer.classList.add('dropdown-option-icon-container')
   const imageElement = document.createElement('img')
@@ -28,12 +30,12 @@ function optionIcon (pathToIcon){
   return iconContainer
 }
 
-function appendDropdown(event, entry) {
+function appendDropdown(entry) {
   const entryHead = entry.querySelector(".entry-head");
-  const dropdown = createDropdown();
-  dropdown.appendChild(createDropdownOption( '../images/edit.svg', 'edit', 'Edit', () => editEntry(entry)))
-  dropdown.appendChild(createDropdownOption( '../images/copy.svg', 'duplicate', 'Make a copy', () => {duplicateEntry(entry)}))
-  dropdown.appendChild(createDropdownOption( '../images/trash.svg', 'delete', 'Delete', deleteEntry))
+  const dropdown = createDropdown('options-dropdown');
+  dropdown.appendChild(createDropdownOption( '../images/edit.svg', 'Edit', () => editEntry(entry)))
+  dropdown.appendChild(createDropdownOption( '../images/copy.svg', 'Make a copy', () => {duplicateEntry(entry)}))
+  dropdown.appendChild(createDropdownOption( '../images/trash.svg', 'Delete', deleteEntry))
   entryHead.appendChild(dropdown);
   entry.classList.add('options-dropdown-showing')
 }
@@ -122,7 +124,7 @@ function closeShowingDropdown() {
 
 function showOptions(event, entry) {
     closeShowingDropdown(); 
-    appendDropdown(event, entry);
+    appendDropdown(entry);
     document.addEventListener('click', function() {
       const dropdown = entry.querySelector('.options-dropdown')
       if (dropdown) {
@@ -133,4 +135,4 @@ function showOptions(event, entry) {
     event.stopPropagation(); // prevent bubbling up
   }
 
-export { showOptions };
+export { showOptions, createDropdown, createDropdownOption, createOptionIcon };

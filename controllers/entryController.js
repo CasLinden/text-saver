@@ -5,6 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 // get user's entries and stringify ID values, for passsing them to ejs and usage them in our scripts
 async function getAndStringifyUserEntries (userId){
+  console.log(userId)
    const userEntries = await Entry.find( {user: userId} );
    const stringifiedEntries = userEntries.map(entry => {
        const stringifiedEntry = entry.toObject({ virtuals: true });
@@ -98,7 +99,7 @@ exports.update_entry = asyncHandler(async (req, res) => {
 
     existingEntry.entryContent = entry;
     existingEntry.entryTitle = entryTitle;
-    existingEntry.lastEdited.push(Date.now()); 
+    existingEntry.lastEdited = new Date()
 
     await existingEntry.save();
     console.log('about to send res.json from update_entry')
