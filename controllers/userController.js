@@ -26,7 +26,7 @@ exports.log_in = (req, res, next) => {
 // render sign-up form
 exports.render_signup_form = (req, res) => {
   let context = {
-    errors: [] // stope the form from breaking when not rendered with errors
+    errors: [], // stope the form from breaking when not rendered with errors
   };
   res.render("sign-up-form", context);
 };
@@ -74,13 +74,20 @@ exports.create_user = asyncHandler(async (req, res, next) => {
         password: hashedPassword,
       });
       const result = await user.save();
-      res.locals.currentUser = user;
-      let context = {
-        newEntry: {},
-        newEntryErrors: [],
-        entries: []
-      };
-      res.render("dashboard", context);
+
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+
+        res.locals.currentUser = user;
+        let context = {
+          newEntry: {},
+          newEntryErrors: [],
+          entries: [],
+        };
+        res.render("dashboard", context);
+      });
     } catch (err) {
       return next(err);
     }
