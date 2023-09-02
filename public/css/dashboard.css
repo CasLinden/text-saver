@@ -229,4 +229,13 @@ form label{
         margin-left: auto;
         margin-right: 0px;
     }
+
+    .entry{
+        background-color: #333 ;
+    }
+
+    /* fixes undiscovered bug on mobile where entryhead would not change color on collapse entryView.js line 33 */
+    .expanded-entry .entry-head{
+        background-color: #222;
+    }
 }

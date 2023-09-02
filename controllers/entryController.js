@@ -1,5 +1,4 @@
 const Entry = require("../models/entry");
-const passport = require("passport");
 const { body, check, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 

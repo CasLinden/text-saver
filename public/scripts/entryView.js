@@ -29,6 +29,9 @@ function collapseEntry(entry){
     if (entryView) {
     entry.removeChild(entryView)
     }
+    console.log(entry)
+    //this and a line in mobile media query fixes a bug where the color would not change back on mobile dashboard.css 237 
+    entry.querySelector('.entry-head').style.backgroundColor = '#333';
 }
 
 
