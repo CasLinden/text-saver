@@ -119,10 +119,7 @@ form label{
     background-color: #222;
 }
 
-#sort-types-menu:hover,
-.sort-arrow:hover{
-    background-color: #222;
-}
+
 
 #entries-container{
     display: flex;
@@ -157,7 +154,7 @@ form label{
     font-weight: 400;
 }
 
-.entry-head:hover,
+
 .expanded-entry .entry-head{
     background-color:#222;
     cursor: pointer;
@@ -184,9 +181,7 @@ form label{
     margin: 0;
 }
 
-.options-icon-container:hover{
-    background-color:  #333
-}
+
 
 
 .entry-date{
@@ -233,9 +228,20 @@ form label{
     .entry{
         background-color: #333 ;
     }
+}
 
-    /* fixes undiscovered bug on mobile where entryhead would not change color on collapse entryView.js line 33 */
-    .expanded-entry .entry-head{
+@media (hover: hover) {
+    #sort-types-menu:hover,
+    .sort-arrow:hover{
         background-color: #222;
+    }
+
+    .entry-head:hover{
+        background-color: #222;
+        cursor: pointer;
+    }
+
+    .options-icon-container:hover{
+        background-color:  #333
     }
 }
