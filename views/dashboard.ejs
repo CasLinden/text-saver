@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
     <link rel="stylesheet" type="text/css" href="/css/options-dropdowns.css" />
     <script src="/scripts/index.js" type="module" defer></script>
+    <script
+      defer
+      type="application/javascript"
+      src="/tinymce/tinymce.min.js"
+    ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
@@ -25,28 +30,37 @@
         </h1>
 
         <div class="user-tab">
-          <div class="user-tab-user"><span> <%= currentUser.username %> </span><img src="/images/avatar.svg" alt="portrait of anonymous person"></div>
+          <div class="user-tab-user">
+            <span> <%= currentUser.username %> </span
+            ><img src="/images/avatar.svg" alt="portrait of anonymous person" />
+          </div>
           <a class="logout-link" href="/log-out"> Log Out</a>
         </div>
       </header>
       <button id="new-entry-button">Create new Document</button>
-      <div id="page-top-form-container" data-user="<%= currentUser._id %>">
-    </div>      
+      <div
+        id="page-top-form-container"
+        data-user="<%= currentUser._id %>"
+      ></div>
       <section class="user-entries-section">
         <div class="user-entries-header">
           <h2>Your Documents:</h2>
           <div id="sort-entries-menu">
-            <div id="sort-types-menu">Sort By:&nbsp;<span class="current-sort-type"> Last Edit</span> <img src="/images/chevron-down.svg" alt=""></div>
-            <div class="arrow-up sort-arrow"><img src="/images/arrow-up.svg" alt=""></div>
-            <div class="arrow-down sort-arrow active"><img src="/images/arrow-down.svg" alt=""></div>
+            <div id="sort-types-menu">
+              Sort By:&nbsp;<span class="current-sort-type"> Last Edit</span>
+              <img src="/images/chevron-down.svg" alt="" />
+            </div>
+            <div class="arrow-up sort-arrow">
+              <img src="/images/arrow-up.svg" alt="" />
+            </div>
+            <div class="arrow-down sort-arrow active">
+              <img src="/images/arrow-down.svg" alt="" />
+            </div>
           </div>
         </div>
         <div id="entries-container">
-          <% 
-            entries.sort(function(a, b) {
-              return b.lastEdited.getTime() - a.lastEdited.getTime(); 
-            }).forEach(function(entry) { 
-          %>
+          <% entries.sort(function(a, b) { return b.lastEdited.getTime() -
+          a.lastEdited.getTime(); }).forEach(function(entry) { %>
           <div
             class="entry"
             data-id="<%= entry._id %>"
@@ -57,10 +71,20 @@
             data-creation-date="<%= entry.entryDate.toISOString() %>"
           >
             <div class="entry-head">
-              <img class="document-icon" src="/images/document.svg" alt="Document Icon" />
+              <img
+                class="document-icon"
+                src="/images/document.svg"
+                alt="Document Icon"
+              />
               <h3><%- entry.entryTitle %></h3>
               <div class="entry-date"><%= entry.entryDateFormatted %></div>
-              <div class="options-icon-container"><img class="entry-options" src="/images/options.svg" alt="Three dots vertically aligned"></div>
+              <div class="options-icon-container">
+                <img
+                  class="entry-options"
+                  src="/images/options.svg"
+                  alt="Three dots vertically aligned"
+                />
+              </div>
             </div>
           </div>
           <% }); %>

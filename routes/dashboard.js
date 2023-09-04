@@ -5,8 +5,8 @@ const upload = multer();
 
 const entry_controller = require("../controllers/entryController");
 
-// display the user's entries with GET
-router.get("/:userid", entry_controller.display_entries_page)
+// display the user's dashboard with GET
+router.get("/:userid", entry_controller.display_dashboard)
 
 // POST a new entry
 router.post("/:userid", upload.none(), entry_controller.validate_entry, entry_controller.create_entry)

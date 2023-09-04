@@ -12,7 +12,7 @@ function createEntryContentField(entry) {
     const contentSection = document.createElement("pre");
     const content = entry.getAttribute("data-content");
     const decodedContent = decodeHTML(content)
-    contentSection.textContent = decodedContent;
+    contentSection.innerHTML = decodedContent;
     contentSection.classList.add("entry-content");
     const id = entry.getAttribute("data-id");
     contentSection.setAttribute("data-id", id);

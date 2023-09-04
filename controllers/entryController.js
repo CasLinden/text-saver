@@ -1,10 +1,10 @@
 const Entry = require("../models/entry");
-const { body, check, validationResult } = require("express-validator");
+const { body, validationResult } = require("express-validator");
+const sanitizeHtml = require('sanitize-html');
 const asyncHandler = require("express-async-handler");
 
 // get user's entries and stringify ID values, for passsing them to ejs and usage them in our scripts
 async function getAndStringifyUserEntries (userId){
-  console.log(userId)
    const userEntries = await Entry.find( {user: userId} );
    const stringifiedEntries = userEntries.map(entry => {
        const stringifiedEntry = entry.toObject({ virtuals: true });
@@ -15,7 +15,7 @@ async function getAndStringifyUserEntries (userId){
    return stringifiedEntries;
 }
 
-exports.display_entries_page = asyncHandler(async (req, res, next) => {
+exports.display_dashboard = asyncHandler(async (req, res, next) => {
   const userId = req.params.userid;  // Get the user ID from the route parameter
   const entries = await getAndStringifyUserEntries(userId)
   let context = {
@@ -28,35 +28,45 @@ exports.display_entries_page = asyncHandler(async (req, res, next) => {
 
 // validate new entry POST
 exports.validate_entry = [
-  
   body("entry")
-  .trim()
-  .isLength({ min: 1 })
-  .withMessage("Entry field cannot be empty.")
-  .escape(),
-  body("entry-title")
-  .optional()
-  .isLength({ max: 35 })
-  .withMessage("Entry title must be less than 25 characters.")
-  .trim()
-  .escape(),
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("Entry field cannot be empty.")
+    .customSanitizer(value => {
+      return sanitizeHtml(value, {
+        allowedTags: [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'br', 'b', 'strong', 'i', 'em', 'u', 'strike', 's', 'small', 'sup', 'sub', 'ul', 'ol', 'li', 'a', 'blockquote', 'q', 'cite', 'code', 'pre', 'table', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th', 'hr', 'div', 'span' ],
+        allowedAttributes: {
+          'a': [ 'href', 'target', 'rel' ],
+          'img': [ 'src', 'alt', 'width', 'height' ],
+          'td': [ 'colspan', 'rowspan' ],
+          'th': [ 'colspan', 'rowspan' ],
+          'blockquote': [ 'cite' ],
+          'q': [ 'cite' ]
+        }
+      });
+    }),
   
+  body("entry-title")
+    .optional()
+    .isLength({ max: 35 })
+    .withMessage("Entry title must be less than 35 characters.")
+    .trim()
+    .escape(),
+
   async (req, res, next) => {
-    console.log("Req Body in validate_entry:", req.body)
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-   
       res.status(400).json({
         success: false,
         errors: errors.array(),
         entryContent: req.body.entry,
         entryTitle: req.body['entry-title']
       });
-
     } else {
       next();
     }
-  },
+  }
 ];
 
 // handle new entry POST
@@ -102,13 +112,11 @@ exports.update_entry = asyncHandler(async (req, res) => {
     existingEntry.lastEdited = new Date()
 
     await existingEntry.save();
-    console.log('about to send res.json from update_entry')
     res.json({ success: true, redirectUrl: `/dashboard/${userid}` });
 });
 
 // handle entry delete on POST
 exports.delete_entry = asyncHandler(async (req, res, next) => {
-  console.log(req.params.entryid)
   const entryId = req.params.entryid
   await Entry.findByIdAndRemove(entryId)
   res.json({success: true})

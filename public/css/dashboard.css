@@ -51,6 +51,10 @@
     width: 100%;
 }
 
+textarea {
+    overflow: hidden;
+  }
+
 
 form label{
     margin-bottom: 2px;
@@ -186,8 +190,6 @@ form label{
 }
 
 
-
-
 .entry-date{
     margin-left: auto;
     font-family: 'Open sans light',  sans-serif;
@@ -207,16 +209,22 @@ form label{
 
 .entry-content{
     width: 100%;
-    border: 1px solid #555;
     min-height: 5rem;
     padding: 20px;
-    font-family: 'Bitter';
+    background-color: white;
+    color: black;
+    font-family: 'Open sans light', 'Arial Narrow', Arial, sans-serif;
     white-space: pre-wrap;  /* CSS3 */
     white-space: -moz-pre-wrap; /* Firefox */
     white-space: -pre-wrap; /* Opera <7 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word;
     text-wrap: wrap;
+}
+
+.entry-content h1{
+    font-family: 'Open sans light', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 0px;
 }
 
 @media (max-width: 768px) {

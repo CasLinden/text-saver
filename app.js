@@ -38,6 +38,8 @@ app.use(function (req, res, next) {
 
 app.use("/", indexRouter)
 app.use("/dashboard", dashboardRouter)
+// allow views to access tinyMCE script as src="/tinymce/tinymce.min.js"
+// app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 app.use(function(err, req, res, next) {
   console.error(err.stack); // log the stack trace of the error
